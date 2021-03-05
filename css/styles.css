@@ -14,8 +14,8 @@ html, body, .container, #sidebar, #mapContainer {
   width: 320px;
 }
 
-#description, #instructions {
-  margin-top: 15px;
+#description, #instructions, #data {
+  margin-top: 20px;
 }
 
 #mapContainer {

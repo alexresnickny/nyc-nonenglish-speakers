@@ -41,6 +41,8 @@ map.on('style.load', function () {
     })
 });
 
+var layers = ['0-10%', '10-20%', '20-30%', '30-40%', '40-50%', '50-60%', '60% and Up']
+
 
   // Change the cursor to a pointer when the mouse is over the states layer.
   map.on('mouseenter', 'nyc-nonenglish-fill', function () {
