@@ -1,6 +1,8 @@
 html, body, .container, #sidebar, #mapContainer {
   height: 100%;
   margin: 0;
+  font-family: arial;
+  text-align: center;
 }
 
 .container {
@@ -8,8 +10,12 @@ html, body, .container, #sidebar, #mapContainer {
 }
 
 #sidebar {
-  background: gray;
+  background: lightgray;
   width: 320px;
+}
+
+#description, #instructions {
+  margin-top: 15px;
 }
 
 #mapContainer {
