@@ -28,10 +28,26 @@ map.on('style.load', function () {
     'source': 'nyc-nonenglish',
     'layout': {},
     'paint': {
-      'fill-color': [
-        if ("NotEnglish" < 0.1) {
-          
-        }
+      "fill-color": ["step",
+        ["get","NotEnglish"],
+        "#5EF688",0.1,
+        "#5EF6D4",0.2,
+        "#5ECCF6",0.3,
+        "#5E80F6",0.4,
+        "#885EF6",0.5,
+        "#D45EF6",0.6,
+        "#7A3B94"]
       }
+    })
+});
+
+
+  // Change the cursor to a pointer when the mouse is over the states layer.
+  map.on('mouseenter', 'nyc-nonenglish-fill', function () {
+    map.getCanvas().style.cursor = 'pointer';
   });
-})
+
+  // Change it back to a pointer when it leaves.
+  map.on('mouseleave', 'nyc-nonenglish-fill', function () {
+    map.getCanvas().style.cursor = '';
+  });
