@@ -15,7 +15,7 @@ map.on('style.load', function () {
   // add a geojson source
   map.addSource('nyc-nonenglish', {
     type: 'geojson',
-    data: '/data/notEnglishByTract.geojson'
+    data: 'data/notEnglishByTract.geojson'
   });
 
   // add a layer to style and display the Source
