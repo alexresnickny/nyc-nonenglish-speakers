@@ -29,10 +29,12 @@ html, body, .container, #sidebar, #mapContainer {
   border-radius:50%;
   height:20px;
   margin-right: 10px;
+  margin-left: 10px
 }
 
 #a {
   background:#5EF688;
+  margin-bottom: 10px;
 }
 
 #b {
@@ -60,8 +62,7 @@ html, body, .container, #sidebar, #mapContainer {
 }
 
 .legend {
-  display:flex;
+  display: flex;
   right: 10px;
   z-index: 1;
-  margin-top: 10px;
 }
