@@ -37,6 +37,17 @@ map.on('style.load', function () {
       }
     });
 
+    map.addLayer({
+      'id': 'nyc-nonenglish-line',
+      'type': 'line',
+      'source': 'nyc-nonenglish',
+      'layout': {},
+      'paint': {
+        "line-color": "grey",
+        "line-width": 0.3
+      }
+    });
+
     // add an empty data source, which we will use to highlight the tract the user is hovering over
     map.addSource('highlight-feature', {
        type: 'geojson',
