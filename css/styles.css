@@ -23,3 +23,45 @@ html, body, .container, #sidebar, #mapContainer {
 #mapContainer {
   flex-grow: 1;
 }
+
+.colorDots {
+  width:20px;
+  border-radius:50%;
+  height:20px;
+  margin-right: 10px;
+}
+
+#a {
+  background:#5EF688;
+}
+
+#b {
+  background:#5EF6D4;
+}
+
+#c {
+  background:#5ECCF6;
+}
+
+#d {
+  background:#5E80F6;
+}
+
+#e {
+  background:#885EF6;
+}
+
+#f {
+  background:#D45EF6;
+}
+
+#g {
+  background:#7A3B94;
+}
+
+.legend {
+  display:flex;
+  right: 10px;
+  z-index: 1;
+  margin-top: 10px;
+}

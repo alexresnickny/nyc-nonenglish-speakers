@@ -12,14 +12,50 @@
 <body>
   <div class='container'>
     <div id='sidebar'>
-      <h2>Non-English Speakers in NYC</h2>
-      <div id ='description'>New York City is one of the most linguistically diverse cities in the world. It is almost impossible to walk the streets of any part of the city without taking note of the many linguistic communities that call the five boroughs home. This map shows a snapshot in time: highlighting where non-English speakers lived as of 2018.</div>
+      <h1>Non-English Speakers in NYC</h1>
+      <div id ='description'>New York City is one of the most linguistically diverse cities in the world. This map shows a snapshot in time: highlighting where non-English speakers lived as of 2018.</div>
       <div id='instructions'>Click on census tracts on the map to see the total population of each, and how many people who live there do not speak English.</div>
       <!-- text changes with click -->
       <div id='tractInfo'>
-        <div><p class="tractData"><span id='tractNumber'></span></p></div>
-        <div><p class="tractData">Number of non-English Speakers: <span id='notEnglish'></span></p></div>
+        <div><p class="tractData"><b><i><span id='tractNumber'></span></i></b></p></div>
+        <div><p class="tractData">Total Population: <b><span id='totalPop'></span></b></p></div>
+        <div><p class="tractData">Number of non-English Speakers: <b><span id='notEnglish'></span></b></p></div>
       </div>
+
+      <!--legend-->
+      <div class='legend-box'>
+      <h2>Legend</h2>
+        <div class="legend">
+          <div class=colorDots id=1> </div>
+          <div class=pctgColor>0-10%</div>
+        </div>
+        <div class="legend">
+          <p><div class=colorDots id=b> </div>
+          <div class=pctgColor>10-20%</div>
+        </div>
+        <div class="legend">
+          <p><div class=colorDots id=c> </div>
+          <div class=pctgColor>20-30%</div>
+        </div>
+        <div class="legend">
+          <p><div class=colorDots id=d> </div>
+          <div class=pctgColor>30-40%</div>
+        </div>
+        <div class="legend">
+          <p><div class=colorDots id=e> </div>
+          <div class=pctgColor>40-50%</div>
+        </div>
+        <div class="legend">
+          <p><div class=colorDots id=f> </div>
+          <div class=pctgColor>50-60%</div>
+        </div>
+        <div class="legend">
+          <p><div class=colorDots id=G> </div>
+          <div class=pctgColor>>60%</div>
+        </div>
+      </div>
+
+
       <div id='data'>Data for this map comes from the <a href="https://data.census.gov/cedsci/table?q=C16001%3A%20LANGUAGE%20SPOKEN%20AT%20HOME%20FOR%20THE%20POPULATION%205%20YEARS%20AND%20OVER&tid=ACSDT5Y2018.C16001&hidePreview=true">Census Bureau</a> and was accessed via the <a href="https://prattcenter.net/resources/neighborhood_data_portal">Pratt Neighborhood Data Portal</a>.</div>
     </div>
     <div id='mapContainer'>MAP</div>

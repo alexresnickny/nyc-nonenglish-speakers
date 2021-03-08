@@ -69,9 +69,11 @@ map.on('style.load', function () {
          var hoveredFeature = features[0]
 
          var tractNumber = hoveredFeature.properties.NAMELSAD10
+         var totalNumber = hoveredFeature.properties.Tot
          var notEnglishNumber = hoveredFeature.properties.ENG_NOT
 
          $('#tractNumber').text(tractNumber)
+         $('#totalPop').text(totalNumber)
          $('#notEnglish').text(notEnglishNumber)
 
          // set this tract's polygon feature as the data for the highlight source
