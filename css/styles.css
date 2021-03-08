@@ -16,6 +16,8 @@ html, body, .container, #sidebar, #mapContainer {
 
 #description, #instructions, #data {
   margin-top: 20px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 #mapContainer {

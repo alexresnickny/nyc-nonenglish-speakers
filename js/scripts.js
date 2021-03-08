@@ -7,9 +7,6 @@ var map = new mapboxgl.Map({
   zoom: 10, // starting zoom
 });
 
-// function to translate percentage into color
-
-
 // add a navigation control
 var nav = new mapboxgl.NavigationControl();
 map.addControl(nav, 'top-left');
@@ -21,7 +18,7 @@ map.on('style.load', function () {
     data: '/data/notEnglishByTract.geojson'
   });
 
-// add a layer to style and display the addSource
+  // add a layer to style and display the Source
   map.addLayer({
     'id': 'nyc-nonenglish-fill',
     'type': 'fill',
@@ -38,18 +35,57 @@ map.on('style.load', function () {
         "#D45EF6",0.6,
         "#7A3B94"]
       }
-    })
-});
+    });
 
-var layers = ['0-10%', '10-20%', '20-30%', '30-40%', '40-50%', '50-60%', '60% and Up']
+    // add an empty data source, which we will use to highlight the tract the user is hovering over
+    map.addSource('highlight-feature', {
+       type: 'geojson',
+       data: {
+         type: 'FeatureCollection',
+         features: []
+       }
+     })
 
+     // add a layer for the highlighted tract
+     map.addLayer({
+       id: 'highlight-line',
+       type: 'line',
+       source: 'highlight-feature',
+       paint: {
+         'line-width': 3,
+         'line-opacity': 0.9,
+         'line-color': 'white',
+       }
+     });
+
+     //enable pop-up
+     map.on('click', function(e) {
+       // query for the features under the mouse, but only in the tracts layer
+       var features = map.queryRenderedFeatures(e.point, {
+           layers: ['nyc-nonenglish-fill'],
+       });
+
+       if (features.length > 0 ) {
+         var hoveredFeature = features[0]
+
+         var tractNumber = hoveredFeature.properties.NAMELSAD10
+         var notEnglishNumber = hoveredFeature.properties.ENG_NOT
+
+         $('#tractNumber').text(tractNumber)
+         $('#notEnglish').text(notEnglishNumber)
+
+         // set this tract's polygon feature as the data for the highlight source
+         map.getSource('highlight-feature').setData(hoveredFeature.geometry);
+       }
+     })
 
   // Change the cursor to a pointer when the mouse is over the states layer.
   map.on('mouseenter', 'nyc-nonenglish-fill', function () {
     map.getCanvas().style.cursor = 'pointer';
-  });
+  })
 
   // Change it back to a pointer when it leaves.
   map.on('mouseleave', 'nyc-nonenglish-fill', function () {
     map.getCanvas().style.cursor = '';
-  });
+  })
+})
