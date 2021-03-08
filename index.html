@@ -15,6 +15,11 @@
       <h2>Non-English Speakers in NYC</h2>
       <div id ='description'>New York City is one of the most linguistically diverse cities in the world. It is almost impossible to walk the streets of any part of the city without taking note of the many linguistic communities that call the five boroughs home. This map shows a snapshot in time: highlighting where non-English speakers lived as of 2018.</div>
       <div id='instructions'>Click on census tracts on the map to see the total population of each, and how many people who live there do not speak English.</div>
+      <!-- text changes with click -->
+      <div id='tractInfo'>
+        <div><p class="tractData"><span id='tractNumber'></span></p></div>
+        <div><p class="tractData">Number of non-English Speakers: <span id='notEnglish'></span></p></div>
+      </div>
       <div id='data'>Data for this map comes from the <a href="https://data.census.gov/cedsci/table?q=C16001%3A%20LANGUAGE%20SPOKEN%20AT%20HOME%20FOR%20THE%20POPULATION%205%20YEARS%20AND%20OVER&tid=ACSDT5Y2018.C16001&hidePreview=true">Census Bureau</a> and was accessed via the <a href="https://prattcenter.net/resources/neighborhood_data_portal">Pratt Neighborhood Data Portal</a>.</div>
     </div>
     <div id='mapContainer'>MAP</div>
