@@ -3,7 +3,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiYWRyMTEiLCJhIjoiY2tsa2RpMHZlMDF6NzJwcGo4NWxhZ
 var map = new mapboxgl.Map({
   container: 'mapContainer', // container ID
   style: 'mapbox://styles/mapbox/dark-v10', // style URL
-  center: [-73.967442,40.714112], // starting position [lng, lat]
+  center: [-73.967442, 40.714112], // starting position [lng, lat]
   zoom: 10, // starting zoom
 });
 
@@ -11,7 +11,7 @@ var map = new mapboxgl.Map({
 var nav = new mapboxgl.NavigationControl();
 map.addControl(nav, 'top-left');
 
-map.on('style.load', function () {
+map.on('style.load', function() {
   // add a geojson source
   map.addSource('nyc-nonenglish', {
     type: 'geojson',
@@ -26,79 +26,80 @@ map.on('style.load', function () {
     'layout': {},
     'paint': {
       "fill-color": ["step",
-        ["get","NotEnglish"],
-        "#5EF688",0.1,
-        "#5EF6D4",0.2,
-        "#5ECCF6",0.3,
-        "#5E80F6",0.4,
-        "#885EF6",0.5,
-        "#D45EF6",0.6,
-        "#7A3B94"]
-      }
+        ["get", "NotEnglish"],
+        "#5EF688", 0.1,
+        "#5EF6D4", 0.2,
+        "#5ECCF6", 0.3,
+        "#5E80F6", 0.4,
+        "#885EF6", 0.5,
+        "#D45EF6", 0.6,
+        "#7A3B94"
+      ]
+    }
+  });
+
+  map.addLayer({
+    'id': 'nyc-nonenglish-line',
+    'type': 'line',
+    'source': 'nyc-nonenglish',
+    'layout': {},
+    'paint': {
+      "line-color": "grey",
+      "line-width": 0.3
+    }
+  });
+
+  // add an empty data source, which we will use to highlight the tract the user is hovering over
+  map.addSource('highlight-feature', {
+    type: 'geojson',
+    data: {
+      type: 'FeatureCollection',
+      features: []
+    }
+  })
+
+  // add a layer for the highlighted tract
+  map.addLayer({
+    id: 'highlight-line',
+    type: 'line',
+    source: 'highlight-feature',
+    paint: {
+      'line-width': 3,
+      'line-opacity': 0.9,
+      'line-color': 'white',
+    }
+  });
+
+  //enable pop-up
+  map.on('click', function(e) {
+    // query for the features under the mouse, but only in the tracts layer
+    var features = map.queryRenderedFeatures(e.point, {
+      layers: ['nyc-nonenglish-fill'],
     });
 
-    map.addLayer({
-      'id': 'nyc-nonenglish-line',
-      'type': 'line',
-      'source': 'nyc-nonenglish',
-      'layout': {},
-      'paint': {
-        "line-color": "grey",
-        "line-width": 0.3
-      }
-    });
+    if (features.length > 0) {
+      var hoveredFeature = features[0]
 
-    // add an empty data source, which we will use to highlight the tract the user is hovering over
-    map.addSource('highlight-feature', {
-       type: 'geojson',
-       data: {
-         type: 'FeatureCollection',
-         features: []
-       }
-     })
+      var tractNumber = hoveredFeature.properties.NAMELSAD10
+      var totalNumber = hoveredFeature.properties.Tot
+      var notEnglishNumber = hoveredFeature.properties.ENG_NOT
 
-     // add a layer for the highlighted tract
-     map.addLayer({
-       id: 'highlight-line',
-       type: 'line',
-       source: 'highlight-feature',
-       paint: {
-         'line-width': 3,
-         'line-opacity': 0.9,
-         'line-color': 'white',
-       }
-     });
+      $('#tractNumber').text(tractNumber)
+      $('#totalPop').text(totalNumber)
+      $('#notEnglish').text(notEnglishNumber)
 
-     //enable pop-up
-     map.on('click', function(e) {
-       // query for the features under the mouse, but only in the tracts layer
-       var features = map.queryRenderedFeatures(e.point, {
-           layers: ['nyc-nonenglish-fill'],
-       });
-
-       if (features.length > 0 ) {
-         var hoveredFeature = features[0]
-
-         var tractNumber = hoveredFeature.properties.NAMELSAD10
-         var totalNumber = hoveredFeature.properties.Tot
-         var notEnglishNumber = hoveredFeature.properties.ENG_NOT
-
-         $('#tractNumber').text(tractNumber)
-         $('#totalPop').text(totalNumber)
-         $('#notEnglish').text(notEnglishNumber)
-
-         // set this tract's polygon feature as the data for the highlight source
-         map.getSource('highlight-feature').setData(hoveredFeature.geometry);
-       }
-     })
+      // set this tract's polygon feature as the data for the highlight source
+      map.getSource('highlight-feature').setData(hoveredFeature.geometry);
+    }
+  })
 
   // Change the cursor to a pointer when the mouse is over the states layer.
-  map.on('mouseenter', 'nyc-nonenglish-fill', function () {
+  map.on('mouseenter', 'nyc-nonenglish-fill', function() {
     map.getCanvas().style.cursor = 'pointer';
   })
 
   // Change it back to a pointer when it leaves.
-  map.on('mouseleave', 'nyc-nonenglish-fill', function () {
+  map.on('mouseleave', 'nyc-nonenglish-fill', function() {
     map.getCanvas().style.cursor = '';
   })
 })
